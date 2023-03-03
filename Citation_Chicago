@@ -1,0 +1,60 @@
+num_autores = int(input("número de autores"))
+autores = []
+for a in range(num_autores):
+    x = input("nombre y apellido")
+    autores.append(x)
+
+    
+    
+titulo = input("Título")
+revista = input("Revista")
+num_art = input("Número Artículo")
+vol = input("Volumen")
+fecha = input("Fecha")
+url = input("URL")
+p_inicio = input("pagina inicio articulo")
+p_final = input("pagina final articulo")
+p_footnote = input("pagina final footnote")
+
+if num_art != "":
+    num_art = " "+ num_art
+
+autores_string = ""
+p = 0
+for a in autores:
+    if p == 0:
+        temp = a.rsplit(" ", 1)
+        autores_string = temp[1] + ", " + temp[0]
+        p += 1
+    elif p+1 == len(autores) and p != 0:
+        temp = a.rsplit(" ", 1)
+        autores_string = autores_string + " and " + temp[0] + " " + temp[1]
+        p += 1
+    else:
+        temp = a.rsplit(" ", 1)
+        autores_string = autores_string + ", " + temp[0] + " " + temp[1]
+        p += 1
+        
+
+Bibliografia = autores_string + ', \"' + titulo + '.\" ' + "\x1B[3m" + revista + "\x1B[0m" + num_art + ", no. " + vol + " (" + fecha + "): " + p_inicio + "-" + p_final + "."+ url
+
+autores_string = ""
+p = 0
+for a in autores:
+    if p+1 == len(autores) and p != 0:
+        temp = a.rsplit(" ", 1)
+        autores_string = autores_string + " and " + a
+        p += 1
+    else:
+        temp = a.rsplit(" ", 1)
+        autores_string = autores_string + ", " + a
+        p += 1
+if p_footnote == "":   
+    p_footnote = "nnn"
+
+FootNote = autores_string + ', \"' + titulo + '.\" ' + "\x1B[3m" + revista + "\x1B[0m" + num_art + ", no. " + vol + " (" + fecha + "): " + p_footnote + "."+ url
+
+
+print(Bibliografia)
+print("/n")
+print(FootNote)
